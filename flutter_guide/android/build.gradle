@@ -3,6 +3,10 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven {
+            url "http://JRAF.org/static/maven/2"
+        }
     }
 
     dependencies {
