@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_guide/answer.dart';
+
+import 'question.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,9 +16,22 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   int questionIndex = 0;
-  List<String> questions = ['A', 'B', 'C'];
+  var questions = [
+    {
+      "question": "what is you faviorite animal",
+      "answer": ["dog", "cat", "elephant"]
+    },
+    {
+      "question": "what is you faviorite icecream",
+      "answer": ["choclate", "vanila", "butter"]
+    },
+    {
+      "question": "who is handsome guy",
+      "answer": ["me", "me", "me"]
+    },
+  ];
 
-  void onPressedOnButton() {
+  void _onPressedOnButton() {
     setState(() {
       questionIndex = questionIndex + 1;
     });
@@ -32,23 +48,12 @@ class MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: <Widget>[
-            Text(
+            question(
               questions[questionIndex],
             ),
-            RaisedButton(
-              child: Text("Answer 1"),
-              onPressed: onPressedOnButton,
-            ),
-            RaisedButton(
-                child: Text("Answer 2"),
-                onPressed: () {
-                  onPressedOnButton();
-                }),
-            RaisedButton(
-                child: Text("Answer 3"),
-                onPressed: () {
-                  onPressedOnButton();
-                }),
+            Answer(_onPressedOnButton, "Answer 1"),
+            Answer(_onPressedOnButton, "Answer 2"),
+            Answer(_onPressedOnButton, "Answer 3"),
           ],
         ),
       ),
