@@ -4,10 +4,26 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  int questionIndex = 0;
+  List<String> questions = ['A', 'B', 'C'];
+
+  void onPressedOnButton() {
+    setState(() {
+      questionIndex = questionIndex + 1;
+    });
+    print(questionIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -16,10 +32,23 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: <Widget>[
-            Text("this is the quetion"),
-            RaisedButton(child: Text("Answer 1"), onPressed: null),
-            RaisedButton(child: Text("Answer 2"), onPressed: null),
-            RaisedButton(child: Text("Answer 3"), onPressed: null),
+            Text(
+              questions[questionIndex],
+            ),
+            RaisedButton(
+              child: Text("Answer 1"),
+              onPressed: onPressedOnButton,
+            ),
+            RaisedButton(
+                child: Text("Answer 2"),
+                onPressed: () {
+                  onPressedOnButton();
+                }),
+            RaisedButton(
+                child: Text("Answer 3"),
+                onPressed: () {
+                  onPressedOnButton();
+                }),
           ],
         ),
       ),
