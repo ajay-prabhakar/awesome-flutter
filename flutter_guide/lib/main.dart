@@ -14,19 +14,33 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  int score = 0;
+  int rscore = 0;
   int questionIndex = 0;
   var questions = [
     {
       "question": "what is you faviorite animal",
-      "answer": ["dog", "cat", "elephant"]
+      "answer": [
+        {"text": "dog", "score": 10},
+        {"text": "cat", "score": 5},
+        {"text": "elephant", "score": 3}
+      ]
     },
     {
       "question": "what is you faviorite icecream",
-      "answer": ["choclate", "vanila", "butter"]
+      "answer": [
+        {"text": "vanila", "score": 10},
+        {"text": "butter", "score": 5},
+        {"text": "choclate", "score": 3}
+      ]
     },
     {
       "question": "who is handsome guy",
-      "answer": ["me", "me", "me"]
+      "answer": [
+        {"text": "me", "score": 10},
+        {"text": "me", "score": 5},
+        {"text": "me", "score": 3}
+      ]
     },
   ];
 
@@ -34,6 +48,7 @@ class MyAppState extends State<MyApp> {
     setState(() {
       questionIndex = questionIndex + 1;
     });
+    score = score + rscore;
     print(questionIndex);
   }
 
@@ -45,16 +60,48 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("First App"),
         ),
-        body: Column(
-          children: <Widget>[
-            question(
-              questions[questionIndex]["question"],
-            ),
-            ...(questions[questionIndex]["answer"] as List<String>).map((answer){
-              return Answer(_onPressedOnButton,answer);
-            })
-          ],
-        ),
+        body: questionIndex < questions.length
+            ? Column(
+                children: <Widget>[
+                  question(
+                    questions[questionIndex]["question"],
+                  ),
+                  ...(questions[questionIndex]["answer"]
+                          as List<Map<String, Object>>)
+                      .map((answer) {
+                    rscore = answer["score"];
+                    return Answer(_onPressedOnButton, answer["text"]);
+                  }),
+                ],
+              )
+            : Column(
+                children: <Widget>[
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(top: 150),
+                    child: Text(
+                      "You did !! and your score is " + score.toString(),
+                      style: TextStyle(fontSize: 25),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(30),
+                    color: Colors.blue,
+                    child: RaisedButton(
+                      color: Colors.blue,
+                      child: Text("Reset"),
+                      onPressed: () {
+                        setState(() {
+                          questionIndex = 0;
+                          score = 0;
+                          rscore = 0;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }
