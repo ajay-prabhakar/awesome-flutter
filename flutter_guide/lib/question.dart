@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 class question extends StatelessWidget {
-  final String quetionText;
+  final String questionText;
 
-  question(this.quetionText);
+  question(this.questionText);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class question extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.all(10),
       child: Text(
-        quetionText,
+        questionText,
         style: TextStyle(fontSize: 28),
         textAlign: TextAlign.center,
       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_guide/answer.dart';
-
 import 'question.dart';
 
 void main() {
@@ -49,11 +48,11 @@ class MyAppState extends State<MyApp> {
         body: Column(
           children: <Widget>[
             question(
-              questions[questionIndex],
+              questions[questionIndex]["question"],
             ),
-            Answer(_onPressedOnButton, "Answer 1"),
-            Answer(_onPressedOnButton, "Answer 2"),
-            Answer(_onPressedOnButton, "Answer 3"),
+            ...(questions[questionIndex]["answer"] as List<String>).map((answer){
+              return Answer(_onPressedOnButton,answer);
+            })
           ],
         ),
       ),
