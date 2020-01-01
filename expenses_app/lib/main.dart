@@ -7,20 +7,18 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: "Expenses App",home: MyHomePage());
+    return MaterialApp(title: "Expenses App", home: MyHomePage());
   }
 }
 
-class MyHomePage extends StatelessWidget{
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Expenses App"),
       ),
-      body: Column(
-
-      ),
+      body: Column(),
     );
   }
 }
